@@ -1,0 +1,58 @@
+name: Validate and deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  validate-and-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the project
+        uses: actions/checkout@v7.0.1
+      - name: Set up Node.js
+        uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24'
+      - name: Validate all lessons
+        run: node tools/validate.js
+      - name: Check learning activities and source review
+        run: node tools/test-learning.js
+      - name: Compile and test C++ networking examples
+        run: python3 tools/test-networking.py
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6.0.0
+      - name: Prepare the static website
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          cp -R css js examples _site/
+          touch _site/.nojekyll
+      - name: Upload website artifact
+        uses: actions/upload-pages-artifact@v5.0.0
+        with:
+          path: _site
+
+  deploy:
+    needs: validate-and-build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5.0.1

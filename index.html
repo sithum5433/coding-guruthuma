@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%232b513d%27/%3E%3Ctext x=%275%27 y=%2721%27 fill=%27%23d8eab8%27 font-family=%27monospace%27 font-size=%2715%27%3ECG%3C/text%3E%3C/svg%3E" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coding Guruthuma — Zero to Master Interactive Coding Academy</title>
+  <meta name="description" content="Learn Python, Java, C, C++ networking, HTML, CSS, JavaScript, and React through guided learning paths, practical activities, and coding projects." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/learning-ui.css" />
+</head>
+<body>
+  <a class="skip-link" href="#app-main">Skip to learning content</a>
+  <!-- Animated Cyber-Coding Background Canvas & Ambient Aurora -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="ambient-aurora" aria-hidden="true">
+    <div class="aurora-orb orb-1" id="aurora-1"></div>
+    <div class="aurora-orb orb-2" id="aurora-2"></div>
+    <div class="aurora-orb orb-3" id="aurora-3"></div>
+    <div class="cyber-grid-overlay"></div>
+  </div>
+
+  <!-- Top Navigation Header -->
+  <header class="top-navbar" id="top-navbar">
+    <div class="nav-brand" id="brand-logo" role="button" tabindex="0" aria-label="Coding Guruthuma Home">
+      <div class="brand-emblem">
+        <span class="emblem-brackets">{</span>
+        <span class="emblem-core">CG</span>
+        <span class="emblem-brackets">}</span>
+      </div>
+      <div class="brand-text">
+        <span class="brand-title">Coding <span class="brand-highlight">Guruthuma</span></span>
+        <span class="brand-subtitle">A little practice. Real progress.</span>
+      </div>
+    </div>
+
+    <nav class="main-nav" aria-label="Main Navigation">
+      <button class="nav-btn active" data-view="home" id="nav-home">
+        <span>Overview</span>
+      </button>
+      <button class="nav-btn" data-view="classroom" id="nav-classroom">
+        <span>Classroom</span>
+        <span class="nav-pill" id="nav-lesson-count">96 Lessons</span>
+      </button>
+      <button class="nav-btn" data-view="simulators" id="nav-simulators">
+        <span>Practice lab</span>
+      </button>
+      <button class="nav-btn" data-view="sandbox" id="nav-sandbox">
+        <span>Code playground</span>
+      </button>
+      <button class="nav-btn" data-view="mastery" id="nav-mastery">
+        <span>My progress</span>
+      </button>
+    </nav>
+
+    <div class="nav-actions">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button class="lang-btn active" data-set-lang="en">English</button>
+        <button class="lang-btn" data-set-lang="si">සිංහල</button>
+      </div>
+      <button class="action-chip search-trigger" id="btn-global-search" title="Search all 96 lessons &amp; concepts (Ctrl+K)">
+        <span></span>
+        <span class="search-placeholder">Search concepts...</span>
+        <kbd>Ctrl K</kbd>
+      </button>
+
+      <div class="xp-status-pill" id="xp-status-pill" title="Your Coding Guruthuma XP &amp; Rank">
+        <span class="xp-rank-icon" id="user-rank-icon">L1</span>
+        <div class="xp-details">
+          <span class="xp-val"><span id="user-xp">0</span> XP</span>
+          <span class="xp-rank-name" id="user-rank-name">Novice Apprentice</span>
+        </div>
+      </div>
+
+      <div class="streak-pill" id="streak-pill" title="Active Learning Streak">
+        <span></span>
+        <span id="user-streak">1</span>
+      </div>
+
+      <button class="icon-btn" id="btn-toggle-fx" title="Toggle Background Particle Effects" aria-label="Toggle Background Effects">FX</button>
+      <button class="icon-btn" id="btn-toggle-sound" title="Toggle Interactive Synth Audio Feedback" aria-label="Toggle Sound Effects">Sound</button>
+      <button class="mentor-trigger-btn" id="btn-open-mentor" title="Ask Coding Guruthuma Lesson Guide">
+        <span>Ask Guruthuma</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content Router Wrapper -->
+  <main class="app-main" id="app-main" tabindex="-1">
+
+    <!-- =====================================================================
+         VIEW 1: ACADEMY HOME (HERO, PHILOSOPHY, 7 TRACKS, LIVE DEMO)
+         ===================================================================== -->
+    <section class="view-section active" id="view-home">
+      <div class="dashboard-heading">
+        <div><span class="page-kicker">YOUR LEARNING SPACE</span><h1>Small steps. Big possibilities<span>.</span></h1><p>Build your skills, one hands-on lesson at a time.</p></div>
+        <div class="learner-avatar" aria-label="Your learning profile">You<span class="online-dot"></span></div>
+      </div>
+      <div class="dashboard-feature-grid">
+        <article class="welcome-feature">
+          <span class="feature-tag"><span class="pulse-dot"></span> MADE FOR CURIOUS MINDS</span>
+          <h2>Less watching.<br>More <span>“I built that.”</span></h2>
+          <p>Learn a concept. Play with it. Make something real.<br>Your next chapter starts with a little practice.</p>
+          <div class="hero-cta-row"><button class="btn-primary" id="hero-start-btn">Start your journey <span aria-hidden="true">↗</span></button><button class="btn-ghost" id="hero-pathfinder-btn">Explore paths ↓</button></div>
+          <div class="feature-footnote"><span>01 — Learn by doing</span><span>At your own pace</span></div>
+          <div class="hero-code-art" aria-hidden="true"><div class="art-window"><span>● ● ●</span><small>your-next-idea.js</small><pre><b>const</b> you = {<br>  curiosity: <i>Infinity</i>,<br>  progress: <i>"one step"</i><br>};<br><br><b>while</b> (you.keepGoing) {<br>  <em>buildSomething</em>();<br>}</pre><div class="art-success">✓ &nbsp; A little better every day</div></div><div class="art-orbit">&lt;/&gt;</div></div>
+        </article>
+        <article class="network-feature">
+          <div class="feature-tag">NEW LEARNING PATH <span>C++</span></div>
+          <div class="network-art" aria-hidden="true"><span class="network-node">&lt;/&gt;<small>CLIENT</small></span><span class="packet-line"><i></i><i></i><i></i></span><span class="network-node">▤<small>SERVER</small></span></div>
+          <h2>Make the connection.</h2><p>From your first C++ program to a working TCP echo server. See every packet along the way.</p>
+          <div class="network-meta">12 lessons <span>•</span> Guided activities</div>
+          <button class="network-cta" id="start-network-track">Explore C++ networking <span>↗</span></button>
+        </article>
+      </div>
+      <div class="learning-overview-row">
+        <article class="continue-card" id="continue-card" aria-label="Continue learning"></article>
+        <div class="overview-stat"><span class="stat-icon">✓</span><div><strong id="home-completed">0</strong><span>lessons completed</span></div></div>
+        <div class="overview-stat"><span class="stat-icon">↗</span><div><strong id="home-total-xp">0</strong><span>experience earned</span></div></div>
+      </div>
+      <div class="how-it-works"><span class="page-kicker">YOUR RECIPE FOR PROGRESS</span><div><span><b>01</b> Learn the idea</span><i>→</i><span><b>02</b> Try an activity</span><i>→</i><span><b>03</b> Build it yourself</span><i>→</i><span><b>04</b> Check your skills</span></div><button id="hero-simulators-btn">Visit practice lab ↗</button></div>
+
+      <!-- The 7 Language Curriculum Tracks Grid -->
+      <div class="tracks-showcase-section" id="tracks-showcase">
+        <div class="section-header-center">
+          <span class="page-kicker">FIND YOUR NEXT CHAPTER</span>
+          <h2>A path for every kind of builder.</h2>
+          <p>Start with the basics or pick up where you left off. Your progress stays with this browser.</p>
+        </div>
+
+        <!-- Track Filter / Recommended Order -->
+        <div class="learning-paths-bar">
+          <span class="path-label">I want to learn:</span>
+          <button class="path-chip active" data-path="all">Explore all</button>
+          <button class="path-chip" data-path="fullstack">Web development</button>
+          <button class="path-chip" data-path="systems">Systems &amp; networking</button>
+          <button class="path-chip" data-path="beginner-first">Start from zero</button>
+        </div>
+
+        <p class="path-description" id="path-description" aria-live="polite"></p>
+        <div class="tracks-grid" id="home-tracks-grid">
+          <!-- Populated dynamically by app.js from window.CG_CURRICULUM -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         VIEW 2: CLASSROOM & LESSONS (SIDEBAR + 4-TAB INTERACTIVE LESSON STUDIO)
+         ===================================================================== -->
+    <section class="view-section" id="view-classroom">
+      <!-- Top Language Track Selector Bar -->
+      <div class="classroom-track-bar" id="classroom-track-bar" role="navigation" aria-label="Language Track Selector">
+        <!-- Populated dynamically with the 8 tracks + progress -->
+      </div>
+
+      <div class="classroom-layout">
+        <!-- Left Collapsible Curriculum Sidebar -->
+        <aside class="curriculum-sidebar" id="curriculum-sidebar">
+          <div class="sidebar-track-header" id="sidebar-track-header">
+            <!-- Track badge, name, execution model, progress bar -->
+          </div>
+
+          <!-- Level Filter Pills -->
+          <div class="sidebar-level-filter" id="sidebar-level-filter">
+            <button class="lvl-filter-btn active" data-level="all">All (12)</button>
+            <button class="lvl-filter-btn" data-level="beginner">Beg</button>
+            <button class="lvl-filter-btn" data-level="intermediate">Int</button>
+            <button class="lvl-filter-btn" data-level="advanced">Adv</button>
+            <button class="lvl-filter-btn" data-level="master">Mst</button>
+          </div>
+
+          <!-- Accordion List of Sections & Lessons -->
+          <div class="sidebar-sections-list" id="sidebar-sections-list">
+            <!-- Populated dynamically -->
+          </div>
+        </aside>
+
+        <!-- Main Lesson Content Studio -->
+        <div class="lesson-workspace" id="lesson-workspace">
+          <!-- Sticky Lesson Top Bar -->
+          <div class="lesson-topbar" id="lesson-topbar">
+            <div class="lesson-topbar-left">
+              <button class="btn-icon-only" id="btn-toggle-sidebar" title="Toggle Curriculum Sidebar">Menu</button>
+              <div class="lesson-breadcrumbs" id="lesson-breadcrumbs">
+                <span>Python</span> <span>›</span> <span>Beginner</span> <span>›</span> <span>Lesson 01</span>
+              </div>
+            </div>
+
+            <!-- Lesson Sub-View Mode Tabs -->
+            <div class="lesson-mode-tabs" id="lesson-mode-tabs" role="tablist">
+              <button class="lesson-tab active" data-tab="all" title="View Complete Lesson (Theory + Simulator + Code Lab + Quiz)">
+                <span>All steps</span>
+              </button>
+              <button class="lesson-tab" data-tab="theory">
+                <span>1. Learn</span>
+              </button>
+              <button class="lesson-tab" data-tab="simulation">
+                <span>2. Try</span>
+              </button>
+              <button class="lesson-tab" data-tab="playground">
+                <span>3. Build</span>
+              </button>
+              <button class="lesson-tab" data-tab="quiz">
+                <span>4. Check</span>
+              </button>
+            </div>
+
+            <div class="lesson-topbar-right">
+              <button class="btn-bookmark" id="btn-bookmark-lesson" title="Bookmark Lesson">Save</button>
+              <button class="btn-complete-lesson" id="btn-complete-lesson">
+                <span>✓ Mark Complete</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Scrollable Lesson Content Area -->
+          <div class="lesson-content-scroll" id="lesson-content-scroll">
+            <!-- Hero Header of the Active Lesson -->
+            <div class="lesson-hero-card" id="lesson-hero-card"></div>
+            <div id="lesson-journey" class="lesson-journey"></div>
+
+            <!-- PART 1: FULL THEORY, MENTAL MODEL, SYNTAX TABLES & PITFALLS -->
+            <div class="lesson-panel" id="panel-theory" data-panel="theory">
+              <!-- Guruthuma's Mental Model Box -->
+              <div id="lesson-quickstart"></div>
+              <div class="mental-model-card" id="lesson-mental-model"></div>
+
+              <!-- Full Multi-Section Theory Container -->
+              <div class="theory-sections-container" id="lesson-theory-sections"></div>
+
+              <!-- Common Pitfalls & Engineering Fixes -->
+              <div class="pitfalls-container" id="lesson-pitfalls"></div>
+
+              <!-- Key Takeaways Summary -->
+              <div class="takeaways-card" id="lesson-takeaways"></div>
+            </div>
+
+            <!-- PART 2: IN-BROWSER INTERACTIVE SIMULATION & BUG HUNTER MINI-GAME -->
+            <div class="lesson-panel" id="panel-simulation" data-panel="simulation">
+              <div id="network-packet-lab"></div>
+              <div class="simulator-card glass-card">
+                <div class="sim-header">
+                  <div>
+                    <span class="eyebrow-tag">IN-BROWSER INTERACTIVE SIMULATION</span>
+                    <h2 id="sim-title">Interactive Memory &amp; Execution Visualizer</h2>
+                    <p id="sim-instructions"></p>
+                  </div>
+                  <div class="sim-type-badge" id="sim-type-badge">Visualizer</div>
+                </div>
+
+                <!-- Step Controls Bar -->
+                <div class="sim-controls-bar">
+                  <div class="sim-step-buttons">
+                    <button class="btn-sim-ctrl" id="sim-btn-reset" title="Reset to Step 1">Reset</button>
+                    <button class="btn-sim-ctrl" id="sim-btn-prev" title="Previous Step">Prev</button>
+                    <button class="btn-sim-ctrl btn-sim-play" id="sim-btn-play" title="Auto-Play Simulation">Auto-Play</button>
+                    <button class="btn-sim-ctrl btn-sim-next" id="sim-btn-next" title="Next Step">Next Step </button>
+                  </div>
+                  <div class="sim-step-indicator" id="sim-step-pills"></div>
+                </div>
+
+                <!-- Dynamic Simulation Stage -->
+                <div class="sim-stage" id="lesson-sim-stage"></div>
+
+                <!-- Interactive Preset / Parameter Controls -->
+                <div class="sim-interactive-presets" id="lesson-sim-presets"></div>
+              </div>
+
+              <!-- Interactive Mini-Activity: Bug Hunter -->
+              <div class="mini-activity-card glass-card" id="lesson-mini-activity"></div>
+            </div>
+
+            <!-- PART 3: IN-BROWSER CODE PLAYGROUND & GRADED CODING CHALLENGE -->
+            <div class="lesson-panel" id="panel-playground" data-panel="playground">
+              <div class="playground-card glass-card">
+                <div class="playground-header">
+                  <div>
+                    <span class="eyebrow-tag">LIVE IN-BROWSER CODING WORKBENCH</span>
+                    <h2 id="pg-title">Hands-On Coding Challenge</h2>
+                  </div>
+                  <div class="pg-actions-top">
+                    <button class="btn-sm btn-ghost" id="pg-btn-hint">Get Guruthuma Hint</button>
+                    <button class="btn-sm btn-ghost" id="pg-btn-solution">Show Solution</button>
+                    <button class="btn-sm btn-ghost" id="pg-btn-reset">↺ Reset Code</button>
+                  </div>
+                </div>
+
+                <!-- Mission Instructions Banner -->
+                <div class="pg-mission-box" id="pg-mission-box"></div>
+
+                <!-- Progressive Hints Drawer -->
+                <div class="pg-hints-drawer hidden" id="pg-hints-drawer"></div>
+
+                <!-- Split-Pane Editor & Output/Preview Workbench -->
+                <div class="workbench-grid">
+                  <!-- Code Editor Pane -->
+                  <div class="editor-pane">
+                    <div class="pane-toolbar">
+                      <span class="file-tab" id="pg-file-tab">main.py</span>
+                      <div class="toolbar-right">
+                        <span class="shortcut-hint">Ctrl + Enter to Run</span>
+                        <button class="btn-run-code" id="pg-btn-run">Run Code</button>
+                        <button class="btn-verify-code" id="pg-btn-verify">✓ Verify Challenge (+100 XP)</button>
+                      </div>
+                    </div>
+                    <div class="code-editor-wrapper">
+                      <div class="line-numbers" id="pg-line-numbers" aria-hidden="true">1</div>
+                      <textarea
+                        id="pg-code-editor"
+                        class="code-textarea"
+                        spellcheck="false"
+                        autocapitalize="off"
+                        autocomplete="off"
+                        aria-label="In-Browser Code Editor"
+                      ></textarea>
+                    </div>
+                  </div>
+
+                  <!-- Output Console & Live Visual DOM Preview Pane -->
+                  <div class="output-pane">
+                    <div class="pane-toolbar">
+                      <div class="output-tabs">
+                        <button class="out-tab active" data-out="console" id="tab-out-console">Console / Stdout</button>
+                        <button class="out-tab" data-out="preview" id="tab-out-preview">Live Visual Preview</button>
+                        <button class="out-tab" data-out="tests" id="tab-out-tests">Challenge Grader</button>
+                      </div>
+                      <button class="btn-xs btn-ghost" id="pg-btn-clear-out">Clear</button>
+                    </div>
+
+                    <div class="output-body">
+                      <!-- Console Output -->
+                      <div class="out-view active" id="pg-out-console">
+                        <pre class="console-pre" id="pg-console-text">Click "Run Code" to execute your code in the browser...</pre>
+                      </div>
+
+                      <!-- Live Visual DOM/CSS/React Preview Iframe -->
+                      <div class="out-view" id="pg-out-preview">
+                        <iframe id="pg-preview-iframe" title="Live Code Preview" sandbox="allow-scripts"></iframe>
+                      </div>
+
+                      <!-- Automated Challenge Test Grader -->
+                      <div class="out-view" id="pg-out-tests">
+                        <div class="test-results-box" id="pg-test-results">
+                          Click <strong>"✓ Verify Challenge"</strong> to test your code against Guruthuma's automated grading suite!
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PART 4: MASTERY QUIZ, PERSONAL NOTES & NEXT LESSON -->
+            <div class="lesson-panel" id="panel-quiz" data-panel="quiz">
+              <div class="quiz-card glass-card">
+                <div class="quiz-header">
+                  <div>
+                    <span class="eyebrow-tag">CONCEPT MASTERY CHECK</span>
+                    <h2>Test Your Theoretical &amp; Practical Understanding</h2>
+                    <p>Answer all questions below to earn bonus XP and verify your mastery of this lesson.</p>
+                  </div>
+                  <div class="quiz-score-pill" id="quiz-score-pill">0 / 3 Correct</div>
+                </div>
+                <div class="quiz-questions-list" id="lesson-quiz-list"></div>
+              </div>
+
+              <!-- Student Personal Notebook for this Lesson -->
+              <div class="notes-card glass-card">
+                <div class="notes-header">
+                  <h3>Your Personal Engineering Notes for This Lesson</h3>
+                  <span class="notes-saved-indicator" id="notes-saved-status">Auto-saved to browser</span>
+                </div>
+                <textarea
+                  id="lesson-personal-notes"
+                  class="notes-textarea"
+                  placeholder="Write down key insights, formulas, or code snippets you want to remember from this lesson..."
+                ></textarea>
+              </div>
+
+              <!-- Lesson Bottom Navigation Footer -->
+              <div class="lesson-footer-nav">
+                <button class="btn-secondary btn-lg" id="btn-prev-lesson">← Previous Lesson</button>
+                <button class="btn-primary btn-lg" id="btn-complete-and-next">
+                  <span>Complete Lesson &amp; Continue →</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         VIEW 3: INTERACTIVE SIMULATORS LAB (STANDALONE VISUAL SANDBOXES)
+         ===================================================================== -->
+    <section class="view-section" id="view-simulators">
+      <div class="sim-lab-container">
+        <div class="section-header-center">
+          <span class="eyebrow-tag">HANDS-ON COMPUTER SCIENCE VISUALIZER LAB</span>
+          <h2 data-i18n="sim_h2">Interactive In-Browser <span class="gradient-text">Hardware, Memory &amp; Engine Simulators</span></h2>
+          <p>Don't just memorize rules—manipulate pointers, stack frames, CSS Flexbox/Grid axes, DOM trees, the JS Event Loop, and React Fiber reconciliation in real time.</p>
+        </div>
+
+        <!-- Simulator Selector Tabs -->
+        <div class="standalone-sim-tabs" id="standalone-sim-tabs">
+          <button class="sim-lab-tab active" data-sim="memory">Stack, Heap &amp; Pointers (C / Java / Python)</button>
+          <button class="sim-lab-tab" data-sim="algo">Sorting &amp; Binary Search Visualizer</button>
+          <button class="sim-lab-tab" data-sim="css-studio">CSS Flexbox, Grid &amp; Box Model Studio</button>
+          <button class="sim-lab-tab" data-sim="dom-inspector">HTML5 DOM &amp; Accessibility Tree Builder</button>
+          <button class="sim-lab-tab" data-sim="event-loop">JS Event Loop, Promises &amp; Microtasks</button>
+          <button class="sim-lab-tab" data-sim="react-fiber">React Virtual DOM Diffing &amp; Hooks Lab</button>
+          <button class="sim-lab-tab" data-sim="binary-bitwise">Binary, Two's Complement &amp; Bitwise Lab</button>
+        </div>
+
+        <!-- Dynamic Container for the Active Standalone Simulator -->
+        <div class="standalone-sim-stage glass-card" id="standalone-sim-stage">
+          <!-- Populated by js/simulators.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         VIEW 4: FULL MULTI-LANGUAGE IDE SANDBOX
+         ===================================================================== -->
+    <section class="view-section" id="view-sandbox">
+      <div class="sandbox-container">
+        <div class="sandbox-topbar glass-card">
+          <div class="sandbox-title-area">
+            <h2>Coding Guruthuma Multi-Language Polyglot IDE</h2>
+            <p>Write, experiment, and execute code in any of the 8 tracks right inside your browser.</p>
+          </div>
+
+          <div class="sandbox-controls">
+            <label for="sandbox-lang-select" class="ctrl-label">Language:</label>
+            <select id="sandbox-lang-select" class="cyber-select">
+              <option value="python">Python 3 (In-Browser Interpreter)</option>
+              <option value="java">Java 21 (JVM Simulator)</option>
+              <option value="cpp">C++ Networking (source review; compile locally)</option>
+              <option value="c">C17 (GCC Memory &amp; Stdout Simulator)</option>
+              <option value="html">HTML5 (Live DOM Renderer)</option>
+              <option value="css">CSS3 + HTML (Live Visual Renderer)</option>
+              <option value="javascript">JavaScript ES2025 (V8 Browser Runtime)</option>
+              <option value="react">React 19 + JSX (Live Component Renderer)</option>
+            </select>
+
+            <label for="sandbox-template-select" class="ctrl-label">Template:</label>
+            <select id="sandbox-template-select" class="cyber-select"></select>
+
+            <button class="btn-run-code btn-lg" id="sandbox-btn-run">Run Program (Ctrl+Enter)</button>
+          </div>
+        </div>
+
+        <div class="sandbox-workbench">
+          <div class="sandbox-editor-col glass-card">
+            <div class="pane-toolbar">
+              <span class="file-tab" id="sandbox-filename">playground.py</span>
+              <div class="toolbar-right">
+                <button class="btn-xs btn-ghost" id="sandbox-btn-copy">Copy Code</button>
+                <button class="btn-xs btn-ghost" id="sandbox-btn-reset">↺ Reset Template</button>
+              </div>
+            </div>
+            <div class="code-editor-wrapper sandbox-tall">
+              <div class="line-numbers" id="sandbox-line-numbers">1</div>
+              <textarea id="sandbox-code-editor" class="code-textarea" spellcheck="false"></textarea>
+            </div>
+          </div>
+
+          <div class="sandbox-output-col glass-card">
+            <div class="pane-toolbar">
+              <div class="output-tabs">
+                <button class="out-tab active" data-sb-out="console" id="sb-tab-console">Console Output</button>
+                <button class="out-tab" data-sb-out="preview" id="sb-tab-preview">Live Visual Canvas</button>
+              </div>
+              <span class="exec-time-tag" id="sandbox-exec-time">Ready</span>
+            </div>
+            <div class="output-body sandbox-tall">
+              <div class="out-view active" id="sandbox-out-console">
+                <pre class="console-pre" id="sandbox-console-text">Select a language and click "Run Program" to execute...</pre>
+              </div>
+              <div class="out-view" id="sandbox-out-preview">
+                <iframe id="sandbox-preview-iframe" title="Sandbox Visual Output" sandbox="allow-scripts"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         VIEW 5: MASTERY DASHBOARD, ACHIEVEMENTS & CERTIFICATE OF MASTERY
+         ===================================================================== -->
+    <section class="view-section" id="view-mastery">
+      <div class="mastery-container">
+        <div class="section-header-center">
+          <span class="eyebrow-tag">YOUR ENGINEERING JOURNEY</span>
+          <h2 data-i18n="mast_h2">Coding Guruthuma <span class="gradient-text">Mastery Dashboard &amp; Certification</span></h2>
+          <p>Track your progress across all 96 lessons, unlock engineering badges, and generate your official Certificate of Mastery.</p>
+        </div>
+
+        <!-- Top Stats Overview -->
+        <div class="mastery-stats-grid" id="mastery-stats-grid"></div>
+
+        <!-- Track Progress Breakdown & Badges -->
+        <div class="mastery-two-col">
+          <div class="glass-card mastery-panel">
+            <h3>Progress Across All 8 Learning Tracks</h3>
+            <div class="track-progress-list" id="mastery-track-bars"></div>
+          </div>
+
+          <div class="glass-card mastery-panel">
+            <h3>Unlocked Guruthuma Achievements</h3>
+            <div class="badges-grid" id="mastery-badges-grid"></div>
+          </div>
+        </div>
+
+        <!-- Official Certificate Generator -->
+        <div class="certificate-section glass-card">
+          <div class="cert-controls">
+            <div>
+              <span class="eyebrow-tag">OFFICIAL CREDENTIAL</span>
+              <h3>Generate Your Coding Guruthuma Certificate</h3>
+              <p>Enter your full name below to personalize your certificate, then print or save as PDF.</p>
+            </div>
+            <div class="cert-input-group">
+              <input
+                type="text"
+                id="cert-student-name"
+                class="cyber-input"
+                placeholder="Enter Your Full Name (e.g., Kasun Perera)"
+                value="Future Grandmaster Engineer"
+              />
+              <button class="btn-primary" id="btn-print-cert">Print / Save Certificate PDF</button>
+            </div>
+          </div>
+
+          <div class="certificate-frame" id="certificate-printable">
+            <div class="cert-inner-border">
+              <div class="cert-header">
+                <div class="cert-logo">{ CG }</div>
+                <div class="cert-org">CODING GURUTHUMA ACADEMY</div>
+                <div class="cert-subtitle">CERTIFICATE OF COMPUTER SCIENCE &amp; SOFTWARE ENGINEERING MASTERY</div>
+              </div>
+              <div class="cert-body">
+                <p class="cert-presented">This is proudly presented to</p>
+                <h2 class="cert-recipient" id="cert-display-name">Future Grandmaster Engineer</h2>
+                <p class="cert-desc" data-i18n="cert_desc">
+                  for demonstrating rigorous theoretical understanding, algorithmic problem-solving, and hands-on coding proficiency across the <strong>Beginner to Grandmaster Curriculum</strong> covering:
+                </p>
+                <div class="cert-langs-row">
+                  <span>Python</span> • <span>Java</span> • <span>C Programming</span> • <span>HTML5</span> • <span>CSS3</span> • <span>JavaScript</span> • <span>React</span>
+                </div>
+              </div>
+              <div class="cert-footer">
+                <div class="cert-stat-col">
+                  <strong id="cert-xp-val">0 XP</strong>
+                  <span>Total Experience Earned</span>
+                </div>
+                <div class="cert-seal">
+                  <div class="seal-ring"><br/>GURUTHUMA<br/>VERIFIED</div>
+                </div>
+                <div class="cert-stat-col">
+                  <strong id="cert-date-val">2026</strong>
+                  <span>Date of Issuance</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =====================================================================
+       ASK GURUTHUMA AI MENTOR DRAWER
+       ===================================================================== -->
+  <aside class="mentor-drawer hidden" id="mentor-drawer" aria-label="Coding Guruthuma Lesson Guide">
+    <div class="mentor-header">
+      <div class="mentor-title-group">
+        <span class="mentor-avatar-lg"></span>
+        <div>
+          <h3>Coding Guruthuma Tutor</h3>
+          <span class="mentor-sub">Context-Aware CS Mentor &amp; Code Debugger</span>
+        </div>
+      </div>
+      <button class="btn-icon-only" id="btn-close-mentor" aria-label="Close Mentor Drawer">✕</button>
+    </div>
+
+    <div class="mentor-quick-prompts" id="mentor-quick-prompts">
+      <button class="prompt-chip" data-prompt="eli5">Explain Like I'm 10</button>
+      <button class="prompt-chip" data-prompt="analogy">Give Another Analogy</button>
+      <button class="prompt-chip" data-prompt="debug">Inspect My Code</button>
+      <button class="prompt-chip" data-prompt="interview">Senior Interview Question</button>
+      <button class="prompt-chip" data-prompt="cheatsheet">Lesson Cheat Sheet</button>
+    </div>
+
+    <div class="mentor-chat-log" id="mentor-chat-log">
+      <div class="chat-msg msg-guru">
+        <div class="msg-bubble" data-i18n="mentor_welcome">
+          <strong>Ayubowan! Welcome, apprentice! </strong><br/>
+          I am <strong>Coding Guruthuma</strong>. Whether you have never written a single line of code before or you are diving into pointers, JVM internals, or React Fiber—ask me any question or click a prompt above!
+        </div>
+      </div>
+    </div>
+
+    <form class="mentor-input-bar" id="mentor-chat-form">
+      <input
+        type="text"
+        id="mentor-user-input"
+        placeholder="Ask Guruthuma anything (e.g., What is a pointer? Why use useEffect?)..."
+        autocomplete="off"
+      />
+      <button type="submit" class="btn-send-chat">Send ↑</button>
+    </form>
+  </aside>
+
+  <!-- =====================================================================
+       GLOBAL SEARCH & TRACK FINDER MODAL (CTRL + K)
+       ===================================================================== -->
+  <div class="modal-backdrop hidden" id="search-modal-backdrop">
+    <div class="search-modal glass-card" role="dialog" aria-modal="true" aria-label="Search Curriculum">
+      <div class="search-modal-top">
+        <span class="search-icon-lg"></span>
+        <input
+          type="text"
+          id="global-search-input"
+          placeholder="Search across all 96 lessons, 8 tracks, theories &amp; simulators (e.g. 'pointers', 'flexbox', 'useEffect', 'JVM', 'loops')..."
+          autocomplete="off"
+        />
+        <button class="btn-xs btn-ghost" id="btn-close-search">ESC</button>
+      </div>
+      <div class="search-results-list" id="global-search-results"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Curriculum Data Modules (8 tracks, 96 lessons) -->
+  <script src="js/data/curriculum-init.js"></script>
+  <script src="js/data/curriculum-python.js"></script>
+  <script src="js/data/curriculum-java.js"></script>
+  <script src="js/data/curriculum-c.js"></script>
+  <script src="js/data/curriculum-html.js"></script>
+  <script src="js/data/curriculum-css.js"></script>
+  <script src="js/data/curriculum-js.js"></script>
+  <script src="js/data/curriculum-react.js"></script>
+  <script src="js/data/curriculum-cpp.js"></script>
+
+  <!-- Bilingual engine (English / Sinhala) -->
+  <script src="js/i18n/ui-si.js"></script>
+  <script src="js/i18n/lessons-si-python.js"></script>
+  <script src="js/i18n/lessons-si-java.js"></script>
+  <script src="js/i18n/lessons-si-c.js"></script>
+  <script src="js/i18n/lessons-si-web.js"></script>
+  <script src="js/i18n.js"></script>
+
+  <!-- Interactive Simulators, Multi-Language Code Runner & Core App Controller -->
+  <script src="js/simulators.js"></script>
+  <script src="js/code-runner.js"></script>
+  <script src="js/learning.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+

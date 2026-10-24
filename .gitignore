@@ -1,0 +1,26 @@
+# Local editor and OS files
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Generated files and development environments
+_site/
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.o
+*.out
+examples/networking/app
+examples/networking/hello
+examples/networking/lesson
+examples/networking/echo-server
+examples/networking/echo-client
